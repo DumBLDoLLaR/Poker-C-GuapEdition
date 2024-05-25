@@ -1,17 +1,17 @@
 #include <iostream>
-#include <cstdlib> // Для функции rand()
-#include <ctime>   // Для функции time()
-#include <vector>  // Для использования вектора
-#include <algorithm> // Для использования функции find()
-#include <string> // Для перевода из string в int
-#include <stdlib.h> //Для очистки консоли
-#include <windows.h>//Для задания размера консоли
+#include <cstdlib> // Р”Р»СЏ С„СѓРЅРєС†РёРё rand()
+#include <ctime>   // Р”Р»СЏ С„СѓРЅРєС†РёРё time()
+#include <vector>  // Р”Р»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РІРµРєС‚РѕСЂР°
+#include <algorithm> // Р”Р»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ С„СѓРЅРєС†РёРё find()
+#include <string> // Р”Р»СЏ РїРµСЂРµРІРѕРґР° РёР· string РІ int
+#include <stdlib.h> //Р”Р»СЏ РѕС‡РёСЃС‚РєРё РєРѕРЅСЃРѕР»Рё
+#include <windows.h>//Р”Р»СЏ Р·Р°РґР°РЅРёСЏ СЂР°Р·РјРµСЂР° РєРѕРЅСЃРѕР»Рё
 
 using namespace std;
-//функция для перевода char в int
+//С„СѓРЅРєС†РёСЏ РґР»СЏ РїРµСЂРµРІРѕРґР° char РІ int
 int chartoint(char card1)
 {
-    // Преобразование строковых рангов в числовые значения
+    // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ СЃС‚СЂРѕРєРѕРІС‹С… СЂР°РЅРіРѕРІ РІ С‡РёСЃР»РѕРІС‹Рµ Р·РЅР°С‡РµРЅРёСЏ
     char rank1 = card1;
     int rankValue1 = 0;
     if (rank1 == 'J') {
@@ -31,10 +31,10 @@ int chartoint(char card1)
     }
     return rankValue1;
 }
-//Функция для перевода string в int
+//Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїРµСЂРµРІРѕРґР° string РІ int
 int toint(string card1)
 {
-    // Преобразование строковых рангов в числовые значения
+    // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ СЃС‚СЂРѕРєРѕРІС‹С… СЂР°РЅРіРѕРІ РІ С‡РёСЃР»РѕРІС‹Рµ Р·РЅР°С‡РµРЅРёСЏ
     string rank1 = card1;
     int rankValue1 = 0;
     if (rank1 == "J") {
@@ -54,14 +54,14 @@ int toint(string card1)
     }
     return rankValue1;
 }
-// Функция для сравнения карт
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ РєР°СЂС‚
 bool compareCards(const string& card1, const string& card2)
 {
-    // Разделение строки на масть и значение
+    // Р Р°Р·РґРµР»РµРЅРёРµ СЃС‚СЂРѕРєРё РЅР° РјР°СЃС‚СЊ Рё Р·РЅР°С‡РµРЅРёРµ
     string rank1 = card1.substr(card1.find(" ") + 1);
     string rank2 = card2.substr(card2.find(" ") + 1);
 
-    // Преобразование строковых рангов в числовые значения
+    // РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ СЃС‚СЂРѕРєРѕРІС‹С… СЂР°РЅРіРѕРІ РІ С‡РёСЃР»РѕРІС‹Рµ Р·РЅР°С‡РµРЅРёСЏ
     int rankValue1 = 0;
     int rankValue2 = 0;
     if (rank1 == "J") {
@@ -90,20 +90,20 @@ bool compareCards(const string& card1, const string& card2)
         rankValue2 = stoi(rank2);
     }
 
-    return rankValue1 < rankValue2; // Сравнение числовых значений рангов
+    return rankValue1 < rankValue2; // РЎСЂР°РІРЅРµРЅРёРµ С‡РёСЃР»РѕРІС‹С… Р·РЅР°С‡РµРЅРёР№ СЂР°РЅРіРѕРІ
 }
-// Функция для обновления карт стола
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ РєР°СЂС‚ СЃС‚РѕР»Р°
 auto updatetable(vector<string>& table, vector<string>& all1, vector<string>& all2)
 {
-    string suits[] = {"c", "d", "s", "h"};//где: с - club(крести), d - diamond(буби), s - spades(пики), h - heart(черви)
+    string suits[] = {"c", "d", "s", "h"};//РіРґРµ: СЃ - club(РєСЂРµСЃС‚Рё), d - diamond(Р±СѓР±Рё), s - spades(РїРёРєРё), h - heart(С‡РµСЂРІРё)
     string ranks[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "T"};
-    vector<string> selectedCards; // Вектор для отслеживания уже выбранных карт
-    // Функция для проверки, была ли уже выбрана данная карта
+    vector<string> selectedCards; // Р’РµРєС‚РѕСЂ РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ СѓР¶Рµ РІС‹Р±СЂР°РЅРЅС‹С… РєР°СЂС‚
+    // Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё, Р±С‹Р»Р° Р»Рё СѓР¶Рµ РІС‹Р±СЂР°РЅР° РґР°РЅРЅР°СЏ РєР°СЂС‚Р°
     auto isCardSelected = [&](const string& card) {
         return find(selectedCards.begin(), selectedCards.end(), card) != selectedCards.end();
     };
 
-    // Функция для добавления выбранной карты в вектор выбранных карт
+    // Р¤СѓРЅРєС†РёСЏ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ РІС‹Р±СЂР°РЅРЅРѕР№ РєР°СЂС‚С‹ РІ РІРµРєС‚РѕСЂ РІС‹Р±СЂР°РЅРЅС‹С… РєР°СЂС‚
     auto addSelectedCard = [&](const string& card) {
         selectedCards.push_back(card);
     };
@@ -113,7 +113,7 @@ auto updatetable(vector<string>& table, vector<string>& all1, vector<string>& al
         suitIndex = rand() % 4;
         rankIndex = rand() % 13;
         card = suits[suitIndex] + " " + ranks[rankIndex];
-    } while (isCardSelected(card)); // Проверка, была ли уже выбрана такая карта
+    } while (isCardSelected(card)); // РџСЂРѕРІРµСЂРєР°, Р±С‹Р»Р° Р»Рё СѓР¶Рµ РІС‹Р±СЂР°РЅР° С‚Р°РєР°СЏ РєР°СЂС‚Р°
     table.push_back(card);
     sort(table.begin(), table.end(), compareCards);
     all1.push_back(card);
@@ -123,18 +123,18 @@ auto updatetable(vector<string>& table, vector<string>& all1, vector<string>& al
     addSelectedCard(card);
 
 }
-// Функция для первоначального размещения карт
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅРѕРіРѕ СЂР°Р·РјРµС‰РµРЅРёСЏ РєР°СЂС‚
 auto addcard(vector<string>& place, int times)
 {
-    string suits[] = {"c", "d", "s", "h"};//где: с - club(крести), d - diamond(буби), s - spades(пики), h - heart(черви)
+    string suits[] = {"c", "d", "s", "h"};//РіРґРµ: СЃ - club(РєСЂРµСЃС‚Рё), d - diamond(Р±СѓР±Рё), s - spades(РїРёРєРё), h - heart(С‡РµСЂРІРё)
     string ranks[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "T"};
-    vector<string> selectedCards; // Вектор для отслеживания уже выбранных карт
-    // Функция для проверки, была ли уже выбрана данная карта
+    vector<string> selectedCards; // Р’РµРєС‚РѕСЂ РґР»СЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ СѓР¶Рµ РІС‹Р±СЂР°РЅРЅС‹С… РєР°СЂС‚
+    // Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕРІРµСЂРєРё, Р±С‹Р»Р° Р»Рё СѓР¶Рµ РІС‹Р±СЂР°РЅР° РґР°РЅРЅР°СЏ РєР°СЂС‚Р°
     auto isCardSelected = [&](const string& card) {
         return find(selectedCards.begin(), selectedCards.end(), card) != selectedCards.end();
     };
 
-    // Функция для добавления выбранной карты в вектор выбранных карт
+    // Р¤СѓРЅРєС†РёСЏ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ РІС‹Р±СЂР°РЅРЅРѕР№ РєР°СЂС‚С‹ РІ РІРµРєС‚РѕСЂ РІС‹Р±СЂР°РЅРЅС‹С… РєР°СЂС‚
     auto addSelectedCard = [&](const string& card) {
         selectedCards.push_back(card);
     };
@@ -145,7 +145,7 @@ auto addcard(vector<string>& place, int times)
             suitIndex = rand() % 4;
             rankIndex = rand() % 13;
             card = suits[suitIndex] + " " + ranks[rankIndex];
-        } while (isCardSelected(card)); // Проверка, была ли уже выбрана такая карта
+        } while (isCardSelected(card)); // РџСЂРѕРІРµСЂРєР°, Р±С‹Р»Р° Р»Рё СѓР¶Рµ РІС‹Р±СЂР°РЅР° С‚Р°РєР°СЏ РєР°СЂС‚Р°
 
         place.push_back(card);
         addSelectedCard(card);
@@ -153,7 +153,7 @@ auto addcard(vector<string>& place, int times)
 
     sort(place.begin(), place.end(), compareCards);
 }
-// Функция для нахождения комбинаций
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РЅР°С…РѕР¶РґРµРЅРёСЏ РєРѕРјР±РёРЅР°С†РёР№
 auto checkCombo(vector<string>& all1, vector<string>& who, string& high, string& minim, int flag, string& message1, string& message2)
 {
     vector<string> combo;
@@ -432,7 +432,7 @@ auto checkCombo(vector<string>& all1, vector<string>& who, string& high, string&
     combo.push_back(std::to_string(result));
     return combo;
 }
-// Функция для вывода
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РІС‹РІРѕРґР°
 auto show(vector<string>& table, vector<string>& hands, vector<string>& op, int& croupier, int& times, int& moneyPlayer, int& moneyOp, string& message1, string& message2)
 {
     if (times == 0)
@@ -507,229 +507,252 @@ auto show(vector<string>& table, vector<string>& hands, vector<string>& op, int&
         message2 = "";
     }
 }
-//Функция, показывающая победившего игрока
+//Р¤СѓРЅРєС†РёСЏ, РїРѕРєР°Р·С‹РІР°СЋС‰Р°СЏ РїРѕР±РµРґРёРІС€РµРіРѕ РёРіСЂРѕРєР°
 int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& hands, vector<string>& op, int& croupier, int& moneyPlayer, int& moneyOp, int& theend)
 {
     if (croupier != 0)
     {
         if (atoi(comboPlayer[2].c_str()) > atoi(comboOp[2].c_str()))
         {
-            cout << "You win! +" << croupier/2 << "$\n";
-            cout << "Next?\n1. Yes\n2. No\n";
-            int next;
-            cin >> next;
-            system("cls");
-            if (next == 1)
+            moneyPlayer += croupier;
+            if (theend == 0)
             {
-                moneyPlayer += croupier;
-                croupier = 0;
-                next = 1;
-                return next;
+                cout << "You win! +" << croupier/2 << "$\n";
+                cout << "Next?\n1. Yes\n2. No\n";
+                int next;
+                cin >> next;
+                system("cls");
+                if (next == 1)
+                {
+                    croupier = 0;
+                    next = 1;
+                    return next;
+                }
+                else
+                {
+                    croupier = 0;
+                    next = 2;
+                    return next;
+                }
             }
-            else
-            {
-                moneyPlayer += croupier;
-                croupier = 0;
-                next = 2;
-                return next;
-            }
+
         }
         else if (atoi(comboPlayer[2].c_str()) < atoi(comboOp[2].c_str()))
         {
-
-            cout << "You lose! -" << croupier/2 << "$\n";
-            cout << "Next?\n1. Yes\n2. No\n";;
-            int next;
-            cin >> next;
-            system("cls");
-            if (next == 1)
+            moneyOp += croupier;
+            if (theend == 0)
             {
-                moneyOp += croupier;
-                croupier = 0;
-                next = 1;
-                return next;
-            }
-            else
-            {
-                croupier = 0;
-                next = 2;
-                return next;
+                cout << "You loose! -" << croupier/2 << "$\n";
+                cout << "Next?\n1. Yes\n2. No\n";
+                int next;
+                cin >> next;
+                system("cls");
+                if (next == 1)
+                {
+                    croupier = 0;
+                    next = 1;
+                    return next;
+                }
+                else
+                {
+                    croupier = 0;
+                    next = 2;
+                    return next;
+                }
             }
         }
         else if (toint(comboPlayer[0]) > toint(comboOp[0]))
         {
-
-            cout << "You win! +" << croupier/2 << "$\n";
-            cout << "Next?\n1. Yes\n2. No\n";;
-            int next;
-            cin >> next;
-            system("cls");
-            if (next == 1)
+            moneyPlayer += croupier;
+            if (theend == 0)
             {
-                moneyPlayer += croupier;
-                croupier = 0;
-                next = 1;
-                return next;
-            }
-            else
-            {
-                croupier = 0;
-                next = 2;
-                return next;
+                cout << "You win! +" << croupier/2 << "$\n";
+                cout << "Next?\n1. Yes\n2. No\n";
+                int next;
+                cin >> next;
+                system("cls");
+                if (next == 1)
+                {
+                    croupier = 0;
+                    next = 1;
+                    return next;
+                }
+                else
+                {
+                    croupier = 0;
+                    next = 2;
+                    return next;
+                }
             }
         }
         else if (toint(comboPlayer[0]) < toint(comboOp[0]))
         {
-
-            cout << "You lose! -" << croupier/2 << "$\n";
-            cout << "Next?\n1. Yes\n2. No\n";
-            int next;
-            cin >> next;
-            system("cls");
-            if (next == 1)
+            moneyOp += croupier;
+            if (theend == 0)
             {
-                moneyOp += croupier;
-                croupier = 0;
-                next = 1;
-                return next;
-            }
-            else
-            {
-                croupier = 0;
-                next = 2;
-                return next;
+                cout << "You loose! -" << croupier/2 << "$\n";
+                cout << "Next?\n1. Yes\n2. No\n";
+                int next;
+                cin >> next;
+                system("cls");
+                if (next == 1)
+                {
+                    croupier = 0;
+                    next = 1;
+                    return next;
+                }
+                else
+                {
+                    croupier = 0;
+                    next = 2;
+                    return next;
+                }
             }
         }
         else if (toint(comboPlayer[1]) > toint(comboOp[1]))
         {
-
-            cout << "You win! +" << croupier/2 << "$\n";
-            cout << "Next?\n1. Yes\n2. No\n";;
-            int next;
-            cin >> next;
-            system("cls");
-            if (next == 1)
+            moneyPlayer += croupier;
+            if (theend == 0)
             {
-                moneyPlayer += croupier;
-                croupier = 0;
-                next = 1;
-                return next;
-            }
-            else
-            {
-                croupier = 0;
-                next = 2;
-                return next;
+                cout << "You win! +" << croupier/2 << "$\n";
+                cout << "Next?\n1. Yes\n2. No\n";
+                int next;
+                cin >> next;
+                system("cls");
+                if (next == 1)
+                {
+                    croupier = 0;
+                    next = 1;
+                    return next;
+                }
+                else
+                {
+                    croupier = 0;
+                    next = 2;
+                    return next;
+                }
             }
         }
         else if (toint(comboPlayer[1]) < toint(comboOp[1]))
         {
-
-            cout << "You lose! -" << croupier/2 << "$\n";
-            cout << "Next?\n1. Yes\n2. No\n";
-            int next;
-            cin >> next;
-            system("cls");
-            if (next == 1)
+            moneyOp += croupier;
+            if (theend == 0)
             {
-                moneyOp += croupier;
-                croupier = 0;
-                next = 1;
-                return next;
-            }
-            else
-            {
-                croupier = 0;
-                next = 2;
-                return next;
+                cout << "You loose! -" << croupier/2 << "$\n";
+                cout << "Next?\n1. Yes\n2. No\n";
+                int next;
+                cin >> next;
+                system("cls");
+                if (next == 1)
+                {
+                    croupier = 0;
+                    next = 1;
+                    return next;
+                }
+                else
+                {
+                    croupier = 0;
+                    next = 2;
+                    return next;
+                }
             }
         }
         else if (chartoint(hands[1][2]) > chartoint(op[1][2]))
         {
-
-            cout << "You win! +" << croupier/2 << "$\n";
-            cout << "Next?\n1. Yes\n2. No\n";
-            int next;
-            cin >> next;
-            system("cls");
-            if (next == 1)
+            moneyPlayer += croupier;
+            if (theend == 0)
             {
-                moneyPlayer += croupier;
-                croupier = 0;
-                next = 1;
-                return next;
-            }
-            else
-            {
-                croupier = 0;
-                next = 2;
-                return next;
+                cout << "You win! +" << croupier/2 << "$\n";
+                cout << "Next?\n1. Yes\n2. No\n";
+                int next;
+                cin >> next;
+                system("cls");
+                if (next == 1)
+                {
+                    croupier = 0;
+                    next = 1;
+                    return next;
+                }
+                else
+                {
+                    croupier = 0;
+                    next = 2;
+                    return next;
+                }
             }
         }
         else if (chartoint(hands[1][2]) < chartoint(op[1][2]))
         {
-
-            cout << "You lose! -" << croupier/2 << "$\n";
-            cout << "Next?\n1. Yes\n2. No\n";
-            int next;
-            cin >> next;
-            system("cls");
-            if (next == 1)
+            moneyOp += croupier;
+            if (theend == 0)
             {
-                moneyOp += croupier;
-                croupier = 0;
-                next = 1;
-                return next;
-            }
-            else
-            {
-                croupier = 0;
-                next = 2;
-                return next;
+                cout << "You loose! -" << croupier/2 << "$\n";
+                cout << "Next?\n1. Yes\n2. No\n";
+                int next;
+                cin >> next;
+                system("cls");
+                if (next == 1)
+                {
+                    croupier = 0;
+                    next = 1;
+                    return next;
+                }
+                else
+                {
+                    croupier = 0;
+                    next = 2;
+                    return next;
+                }
             }
         }
         else if (chartoint(hands[0][2]) > chartoint(op[0][2]))
         {
-
-            cout << "You win! +" << croupier/2 << "$\n";
-            cout << "Next?\n1. Yes\n2. No\n";
-            int next;
-            cin >> next;
+            moneyPlayer += croupier;
             system("cls");
-            if (next == 1)
+            if (theend == 0)
             {
-                moneyPlayer += croupier;
-                croupier = 0;
-                next = 1;
-                return next;
-            }
-            else
-            {
-                croupier = 0;
-                next = 2;
-                return next;
+                cout << "You win! +" << croupier/2 << "$\n";
+                cout << "Next?\n1. Yes\n2. No\n";
+                int next;
+                cin >> next;
+                system("cls");
+                if (next == 1)
+                {
+                    croupier = 0;
+                    next = 1;
+                    return next;
+                }
+                else
+                {
+                    croupier = 0;
+                    next = 2;
+                    return next;
+                }
             }
         }
         else if (chartoint(hands[0][2]) < chartoint(op[0][2]))
         {
-
-            cout << "You lose! -" << croupier/2 << "$\n";
-            cout << "Next?\n1. Yes\n2. No\n";
-            int next;
-            cin >> next;
+            moneyOp += croupier;
             system("cls");
-            if (next == 1)
+            if (theend == 0)
             {
-                moneyOp += croupier;
-                croupier = 0;
-                next = 1;
-                return next;
-            }
-            else
-            {
-                croupier = 0;
-                next = 2;
-                return next;
+                cout << "You loose! -" << croupier/2 << "$\n";
+                cout << "Next?\n1. Yes\n2. No\n";
+                int next;
+                cin >> next;
+                system("cls");
+                if (next == 1)
+                {
+                    croupier = 0;
+                    next = 1;
+                    return next;
+                }
+                else
+                {
+                    croupier = 0;
+                    next = 2;
+                    return next;
+                }
             }
         }
     }
@@ -916,12 +939,10 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
             }
         }
     }
-    if (theend == 1)
-    {
-        system("cls");
-    }
+    cout << "moneyOp =========" << moneyOp << endl;
+    cout << "moneyOp =========" << moneyPlayer << endl;
 }
-//Функция для прохождения одного курса
+//Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїСЂРѕС…РѕР¶РґРµРЅРёСЏ РѕРґРЅРѕРіРѕ РєСѓСЂСЃР°
 int thegame(vector<string>& table, vector<string>& hands, vector<string>& op, vector<string>& all1, vector<string>& all2, vector<string>& comboPlayer, vector<string>& comboOp, int& times, int& step, int& moneyPlayer, int& moneyOp, int& croupier, int& theend, string& highPlayer, string& minPlayer, string& highOp, string& minOp)
 {
 
@@ -1003,7 +1024,6 @@ int thegame(vector<string>& table, vector<string>& hands, vector<string>& op, ve
     {
         times = 0;
         return round(comboPlayer, comboOp, hands, op, croupier, moneyPlayer, moneyOp, theend);
-        croupier = 0;
     }
     else if (times == 4)
     {
@@ -1017,8 +1037,8 @@ int thegame(vector<string>& table, vector<string>& hands, vector<string>& op, ve
 int main()
 {
     char Title[1024];
-    GetConsoleTitle(Title, 1024); // Узнаем имя окна
-    HWND hwnd=FindWindow(NULL, Title); // Узнаем hwnd окна
+    GetConsoleTitle(Title, 1024); // РЈР·РЅР°РµРј РёРјСЏ РѕРєРЅР°
+    HWND hwnd=FindWindow(NULL, Title); // РЈР·РЅР°РµРј hwnd РѕРєРЅР°
 
     //MoveWindow(hwnd,x,y,width,height,repaint);
     MoveWindow(hwnd,100,50,725,400,true);
@@ -1057,16 +1077,16 @@ int main()
         vector<string> comboOp;
 
 
-        srand(time(0)); // Инициализация генератора случайных чисел
+        srand(time(0)); // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РіРµРЅРµСЂР°С‚РѕСЂР° СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР»
 
-        vector<string> table; // Вектор для хранения карт на столе
-        vector<string> hands; // Вектор для хранения карт в руке игрока
-        vector<string> op;    // Вектор для хранения карт в руке оппонента
+        vector<string> table; // Р’РµРєС‚РѕСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РєР°СЂС‚ РЅР° СЃС‚РѕР»Рµ
+        vector<string> hands; // Р’РµРєС‚РѕСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РєР°СЂС‚ РІ СЂСѓРєРµ РёРіСЂРѕРєР°
+        vector<string> op;    // Р’РµРєС‚РѕСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РєР°СЂС‚ РІ СЂСѓРєРµ РѕРїРїРѕРЅРµРЅС‚Р°
         vector<string> all1;
         vector<string> all2;
 
         int step;
-        int theend;
+        int theend = 0;
         int go = 1;
         while (go != 2)
         {
@@ -1101,11 +1121,19 @@ int main()
 
             go = thegame(table, hands, op, all1, all2, comboPlayer, comboOp, times, step, moneyPlayer, moneyOp, croupier, theend, highPlayer, minPlayer, highOp, minOp);
 
+
             if (go == 2)
             {
                 choose = 2;
             }
-            if (times == 3 && (moneyOp < 1 || moneyPlayer < 1))
+            if (times == 3 && croupier!=0)
+            {
+                theend = 1;
+                round(comboPlayer, comboOp, hands, op, croupier, moneyPlayer, moneyOp, theend);
+                theend = 0;
+
+            }
+            if (moneyOp < 1 || moneyPlayer < 1)
             {
                 choose = thegame(table, hands, op, all1, all2, comboPlayer, comboOp, times, step, moneyPlayer, moneyOp, croupier, theend, highPlayer, minPlayer, highOp, minOp);
                 times = 4;
