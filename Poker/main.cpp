@@ -514,8 +514,11 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
     {
         if (atoi(comboPlayer[2].c_str()) > atoi(comboOp[2].c_str()))
         {
-            moneyPlayer += croupier;
-            if (theend == 0)
+            if (theend == 1)
+            {
+                moneyPlayer += croupier;
+            }
+            else if (theend == 0)
             {
                 cout << "You win! +" << croupier/2 << "$\n";
                 cout << "Next?\n1. Yes\n2. No\n";
@@ -539,8 +542,11 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
         }
         else if (atoi(comboPlayer[2].c_str()) < atoi(comboOp[2].c_str()))
         {
-            moneyOp += croupier;
-            if (theend == 0)
+            if (theend == 1)
+            {
+                moneyOp += croupier;
+            }
+            else if (theend == 0)
             {
                 cout << "You loose! -" << croupier/2 << "$\n";
                 cout << "Next?\n1. Yes\n2. No\n";
@@ -563,8 +569,11 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
         }
         else if (toint(comboPlayer[0]) > toint(comboOp[0]))
         {
-            moneyPlayer += croupier;
-            if (theend == 0)
+            if (theend == 1)
+            {
+                moneyPlayer += croupier;
+            }
+            else if (theend == 0)
             {
                 cout << "You win! +" << croupier/2 << "$\n";
                 cout << "Next?\n1. Yes\n2. No\n";
@@ -587,8 +596,11 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
         }
         else if (toint(comboPlayer[0]) < toint(comboOp[0]))
         {
-            moneyOp += croupier;
-            if (theend == 0)
+            if (theend == 1)
+            {
+                moneyOp += croupier;
+            }
+            else if (theend == 0)
             {
                 cout << "You loose! -" << croupier/2 << "$\n";
                 cout << "Next?\n1. Yes\n2. No\n";
@@ -611,8 +623,11 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
         }
         else if (toint(comboPlayer[1]) > toint(comboOp[1]))
         {
-            moneyPlayer += croupier;
-            if (theend == 0)
+            if (theend == 1)
+            {
+                moneyPlayer += croupier;
+            }
+            else if (theend == 0)
             {
                 cout << "You win! +" << croupier/2 << "$\n";
                 cout << "Next?\n1. Yes\n2. No\n";
@@ -635,8 +650,11 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
         }
         else if (toint(comboPlayer[1]) < toint(comboOp[1]))
         {
-            moneyOp += croupier;
-            if (theend == 0)
+            if (theend == 1)
+            {
+                moneyOp += croupier;
+            }
+            else if (theend == 0)
             {
                 cout << "You loose! -" << croupier/2 << "$\n";
                 cout << "Next?\n1. Yes\n2. No\n";
@@ -659,8 +677,11 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
         }
         else if (chartoint(hands[1][2]) > chartoint(op[1][2]))
         {
-            moneyPlayer += croupier;
-            if (theend == 0)
+            if (theend == 1)
+            {
+                moneyPlayer += croupier;
+            }
+            else if (theend == 0)
             {
                 cout << "You win! +" << croupier/2 << "$\n";
                 cout << "Next?\n1. Yes\n2. No\n";
@@ -683,8 +704,11 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
         }
         else if (chartoint(hands[1][2]) < chartoint(op[1][2]))
         {
-            moneyOp += croupier;
-            if (theend == 0)
+            if (theend == 1)
+            {
+                moneyOp += croupier;
+            }
+            else if (theend == 0)
             {
                 cout << "You loose! -" << croupier/2 << "$\n";
                 cout << "Next?\n1. Yes\n2. No\n";
@@ -707,9 +731,11 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
         }
         else if (chartoint(hands[0][2]) > chartoint(op[0][2]))
         {
-            moneyPlayer += croupier;
-            system("cls");
-            if (theend == 0)
+            if (theend == 1)
+            {
+                moneyPlayer += croupier;
+            }
+            else if (theend == 0)
             {
                 cout << "You win! +" << croupier/2 << "$\n";
                 cout << "Next?\n1. Yes\n2. No\n";
@@ -732,9 +758,11 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
         }
         else if (chartoint(hands[0][2]) < chartoint(op[0][2]))
         {
-            moneyOp += croupier;
-            system("cls");
-            if (theend == 0)
+            if (theend == 1)
+            {
+                moneyOp += croupier;
+            }
+            else if (theend == 0)
             {
                 cout << "You loose! -" << croupier/2 << "$\n";
                 cout << "Next?\n1. Yes\n2. No\n";
@@ -940,7 +968,7 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
         }
     }
     cout << "moneyOp =========" << moneyOp << endl;
-    cout << "moneyOp =========" << moneyPlayer << endl;
+    cout << "moneyPlayer =========" << moneyPlayer << endl;
 }
 //Функция для прохождения одного курса
 int thegame(vector<string>& table, vector<string>& hands, vector<string>& op, vector<string>& all1, vector<string>& all2, vector<string>& comboPlayer, vector<string>& comboOp, int& times, int& step, int& moneyPlayer, int& moneyOp, int& croupier, int& theend, string& highPlayer, string& minPlayer, string& highOp, string& minOp)
@@ -1131,36 +1159,33 @@ int main()
                 theend = 1;
                 round(comboPlayer, comboOp, hands, op, croupier, moneyPlayer, moneyOp, theend);
                 theend = 0;
-
-            }
-            if (moneyOp < 1 || moneyPlayer < 1)
-            {
-                choose = thegame(table, hands, op, all1, all2, comboPlayer, comboOp, times, step, moneyPlayer, moneyOp, croupier, theend, highPlayer, minPlayer, highOp, minOp);
-                times = 4;
-                if (choose == 1)
+                if (moneyOp < 1 || moneyPlayer < 1)
                 {
-                    if (moneyOp < 1)
+                    choose = thegame(table, hands, op, all1, all2, comboPlayer, comboOp, times, step, moneyPlayer, moneyOp, croupier, theend, highPlayer, minPlayer, highOp, minOp);
+                    times = 4;
+                    if (choose == 1)
                     {
-                        thegame(table, hands, op, all1, all2, comboPlayer, comboOp, times, step, moneyPlayer, moneyOp, croupier, theend, highPlayer, minPlayer, highOp, minOp);;
-                        cout << "Congratulations! You win! Opponent ran out of money.\n" << endl;
-                        times = 0;
+                        if (moneyOp < 1)
+                        {
+                            cout << "Congratulations! You win! Opponent ran out of money.\n" << endl;
+                            times = 0;
+                        }
+                        else if (moneyPlayer < 1)
+                        {
+                            thegame(table, hands, op, all1, all2, comboPlayer, comboOp, times, step, moneyPlayer, moneyOp, croupier, theend, highPlayer, minPlayer, highOp, minOp);
+                            cout << "You loose. You ran out of balance. Good luck mext time!\n" << endl;
+                            times = 0;
+                        }
+                        cout << "1.Start new game\n2.Exit" << endl;
+                        cin >> choose;
+                        go = 2;
                     }
-                    else if (moneyPlayer < 1)
+                    else if (choose == 2)
                     {
-                        thegame(table, hands, op, all1, all2, comboPlayer, comboOp, times, step, moneyPlayer, moneyOp, croupier, theend, highPlayer, minPlayer, highOp, minOp);
-                        cout << "You loose. You ran out of balance. Good luck mext time!\n" << endl;
-                        times = 0;
+                        go = 2;
                     }
-                    cout << "1.Start new game\n2.Exit" << endl;
-                    cin >> choose;
-                    go = 2;
-                }
-                else if (choose == 2)
-                {
-                    go = 2;
                 }
             }
-
         }
     }
     system("cls");
