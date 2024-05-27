@@ -163,9 +163,9 @@ auto checkCombo(vector<string>& all1, vector<string>& who, string& high, string&
     int combination = 0;
     int counter = 0;
     int suits = 0;
+    int indStreet = 0;
     string street1;
     string street2;
-    string flash1;
 
     int pair1 = 0;
     int pair2 = 0;
@@ -245,6 +245,7 @@ auto checkCombo(vector<string>& all1, vector<string>& who, string& high, string&
             row +=1;
             if (row >= 5)
             {
+                indStreet = i - 3;
                 street1 = all1[i - 3][2];
                 street2 = all1[i + 1][2];
                 street = 1;
@@ -279,12 +280,13 @@ auto checkCombo(vector<string>& all1, vector<string>& who, string& high, string&
     if (street == 1)
     {
         if (suits >= 10){
-            if (key == 'T'){
+            if (all1[all1.size()-1][0] == all1[all1.size()-2][0] && all1[all1.size()-1][0] == all1[all1.size()-3][0] && all1[all1.size()-1][0] == all1[all1.size()-4][0] && all1[all1.size()-1][0] == all1[all1.size()-5][0]){
                 result = 9;
                 combo[0] = street2;
                 combo[1] = "10";
             }
-            else{
+            else if (all1[indStreet][0] == all1[indStreet+1][0] && all1[indStreet][0] == all1[indStreet+2][0] && all1[indStreet][0] == all1[indStreet+3][0] && all1[indStreet][0] == all1[indStreet+4][0])
+            {
                 result = 8;
                 combo[0] = street2;
                 combo[1] = street1;
@@ -377,11 +379,11 @@ auto checkCombo(vector<string>& all1, vector<string>& who, string& high, string&
     {
         if (result == 9)
         {
-            message2 += "Flash-Royale!\n";
+            message2 += "Flash-Royale!";
         }
         else if (result == 8)
         {
-            message2 += "Street-Flash!\n";
+            message2 += "Street-Flash!";
         }
         else if (result == 7)
         {
@@ -432,6 +434,38 @@ auto checkCombo(vector<string>& all1, vector<string>& who, string& high, string&
     combo.push_back(std::to_string(result));
     return combo;
 }
+//функция для корректного вывода карты 10
+auto showTen(char it, int number)
+{
+    std::string numero;
+    std::string str(1, it);
+    if (number == 1)
+    {
+        if (it == '1')
+        {
+            numero = "10";
+            return numero;
+        }
+        else
+        {
+            numero = str+" ";
+            return numero;
+        }
+    }
+    else if (number == 2)
+    {
+        if (it == '1')
+        {
+            numero = "10";
+            return numero;
+        }
+        else
+        {
+            numero = "_"+str;
+            return numero;
+        }
+    }
+}
 // Функция для вывода
 auto show(vector<string>& table, vector<string>& hands, vector<string>& op, int& croupier, int& times, int& moneyPlayer, int& moneyOp, string& message1, string& message2)
 {
@@ -446,17 +480,17 @@ auto show(vector<string>& table, vector<string>& hands, vector<string>& op, int&
         cout << "Hands\t\t\t\t\t      Table\t\t\t\t      Opponent" << endl;
 
         cout << "_____\t\t\t\t\t _____ _____ _____ \t\t\t\t_____" << endl;
-        cout << "|" << hands[0][2] << "  | \t\t\t\t\t |" << table[0][2] << "  | |" << table[1][2] << "  | |" << table[2][2] << "  |\t\t\t\t|   |" << endl;
+        cout << "|" << showTen(hands[0][2], 1) << " | \t\t\t\t\t |" << showTen(table[0][2], 1) << " | |" << showTen(table[1][2], 1) << " | |" << showTen(table[2][2], 1) << " |\t\t\t\t|   |" << endl;
         cout << "| " << hands[0][0] << " | \t\t\t\t\t | " << table[0][0] << " | | " << table[1][0] << " | | " << table[2][0] << " |\t\t\t\t| ? |" << endl;
-        cout << "|__" << hands[0][2] << "| \t\t\t\t\t |__" << table[0][2] << "| |__" << table[1][2] << "| |__" << table[2][2] << "|\t\t\t\t|___|" << endl;
+        cout << "|_" << showTen(hands[0][2], 2) << "| \t\t\t\t\t |_" << showTen(table[0][2], 2) << "| |_" << showTen(table[1][2], 2) << "| |_" << showTen(table[2][2], 2) << "|\t\t\t\t|___|" << endl;
 
         cout << "_____\t\t\t\t\t\t\t    \t\t\t\t_____" << endl;
-        cout << "|" << hands[1][2] << "  |\t\t\t\t\t\t\t\t\t\t\t|   |" << endl;
+        cout << "|" << showTen(hands[1][2], 1) << " |\t\t\t\t\t\t\t\t\t\t\t|   |" << endl;
         cout << "| " << hands[1][0] << " |\t\t\t\t\t\t\t\t\t\t\t| ? |" << endl;
-        cout << "|__" << hands[1][2] << "|\t\t\t\t\t\t\t\t\t\t\t|___|" << endl;
+        cout << "|_" << showTen(hands[1][2], 2) << "|\t\t\t\t\t\t\t\t\t\t\t|___|" << endl;
 
         cout << "==============================================================================================" << endl;
-        cout << "Combination: " << message1 << "\t\t     ||\t\t\t\t      by Nikitin Artem" << endl;
+        cout << "Combination: " << message1 << "\t\t    ||\t\t\t\t      by Nikitin Artem" << endl;
         cout << "==============================================================================================\n" << endl;
         message1 = "";
         message2 = "";
@@ -468,17 +502,17 @@ auto show(vector<string>& table, vector<string>& hands, vector<string>& op, int&
         cout << "Hands\t\t\t\t\t      Table\t\t\t\t      Opponent" << endl;
 
         cout << "_____\t\t\t\t     _____ _____ _____ _____    \t\t\t_____" << endl;
-        cout << "|" << hands[0][2] << "  | \t\t\t\t     |" << table[0][2] << "  | |" << table[1][2] << "  | |" << table[2][2] << "  | |" << table[3][2] << "  |\t\t\t\t|   |" << endl;
-        cout << "| " << hands[0][0] << " | \t\t\t\t     | " << table[0][0] << " | | " << table[1][0] << " | | " << table[2][0] << " | | " << table[3][0] << " |\t\t\t\t| ? |" << endl;
-        cout << "|__" << hands[0][2] << "| \t\t\t\t     |__" << table[0][2] << "| |__" << table[1][2] << "| |__" << table[2][2] << "| |__" << table[3][2] << "|\t\t\t\t|___|" << endl;
+        cout << "|" << showTen(hands[0][2], 1) << " | \t\t\t\t     |" << showTen(table[0][2], 1) << " | |" << showTen(table[1][2], 1) << " | |" << showTen(table[2][2], 1) << " | |" << showTen(table[3][2], 1) << " |\t\t\t\t|   |" << endl;
+        cout << "| " << hands[0][0] << " |  \t\t\t\t     | " << table[0][0] << " | | " << table[1][0] << " | | " << table[2][0] << " | | " << table[3][0] << " |\t\t\t\t| ? |" << endl;
+        cout << "|_" << showTen(hands[0][2], 2) << "|\t\t\t\t     |_" << showTen(table[0][2], 2) << "| |_" << showTen(table[1][2], 2) << "| |_" << showTen(table[2][2], 2) << "| |_" << showTen(table[3][2], 2) << "|\t\t\t\t|___|" << endl;
 
         cout << "_____\t\t\t\t\t\t\t    \t\t\t\t_____" << endl;
-        cout << "|" << hands[1][2] << "  |\t\t\t\t\t\t\t\t\t\t\t|   |" << endl;
+        cout << "|" << showTen(hands[1][2], 1) << " |\t\t\t\t\t\t\t\t\t\t\t|   |" << endl;
         cout << "| " << hands[1][0] << " |\t\t\t\t\t\t\t\t\t\t\t| ? |" << endl;
-        cout << "|__" << hands[1][2] << "|\t\t\t\t\t\t\t\t\t\t\t|___|" << endl;
+        cout << "|_" << showTen(hands[1][2], 2) << "|\t\t\t\t\t\t\t\t\t\t\t|___|" << endl;
 
         cout << "==============================================================================================" << endl;
-        cout << "Combination: " << message1 << "\t\t     ||\t\t\t\t     by Nikitin Artem" << endl;
+        cout << "Combination: " << message1 << "\t\t    ||\t\t\t\t     by Nikitin Artem" << endl;
         cout << "==============================================================================================\n" << endl;
         message1 = "";
         message2 = "";
@@ -491,17 +525,17 @@ auto show(vector<string>& table, vector<string>& hands, vector<string>& op, int&
         cout << "Hands\t\t\t\t\t      Table\t\t\t\t      Opponent" << endl;
 
         cout << "_____\t\t\t\t  _____ _____ _____ _____ _____   \t\t\t_____" << endl;
-        cout << "|" << hands[0][2] << "  |\t\t\t\t  |" << table[0][2] << "  | |" << table[1][2] << "  | |" << table[2][2] << "  | |" << table[3][2] << "  | |" << table[4][2] << "  |\t\t\t\t|" << op[0][2] << "  |" << endl;
+        cout << "|" << showTen(hands[0][2], 1) << " |\t\t\t\t  |" << showTen(table[0][2], 1) << " | |" << showTen(table[1][2], 1) << " | |" << showTen(table[2][2], 1) << " | |" << showTen(table[3][2], 1) << " | |" << showTen(table[4][2], 1) << " |\t\t\t\t|" << showTen(op[0][2], 1) << " |" << endl;
         cout << "| " << hands[0][0] << " |\t\t\t\t  | " << table[0][0] << " | | " << table[1][0] << " | | " << table[2][0] << " | | " << table[3][0] << " | | " << table[4][0] << " |\t\t\t\t| " << op[0][0] << " |" << endl;
-        cout << "|__" << hands[0][2] << "|\t\t\t\t  |__" << table[0][2] << "| |__" << table[1][2] << "| |__" << table[2][2] << "| |__" << table[3][2] << "| |__" << table[3][2] << "|\t\t\t\t|__" << op[0][2] << "|" << endl;
+        cout << "|_" << showTen(hands[0][2], 2) << "|\t\t\t\t  |_" << showTen(table[0][2], 2) << "| |_" << showTen(table[1][2], 2) << "| |_" << showTen(table[2][2], 2) << "| |_" << showTen(table[3][2], 2) << "| |_" << showTen(table[4][2], 2) << "|\t\t\t\t|_" << showTen(op[0][2], 2) << "|" << endl;
 
         cout << "_____\t\t\t\t\t\t\t    \t\t\t\t_____" << endl;
-        cout << "|" << hands[1][2] << "  |\t\t\t\t\t\t\t\t\t\t\t|" << op[1][2] << "  |" << endl;
+        cout << "|" << showTen(hands[1][2], 1) << " |\t\t\t\t\t\t\t\t\t\t\t|" << showTen(op[1][2], 1) << " |" << endl;
         cout << "| " << hands[1][0] << " |\t\t\t\t\t\t\t\t\t\t\t| " << op[1][0] << " |" << endl;
-        cout << "|__" << hands[1][2] << "|\t\t\t\t\t\t\t\t\t\t\t|__" << op[1][2] << "|" << endl;;
+        cout << "|_" << showTen(hands[1][2], 2) << "|\t\t\t\t\t\t\t\t\t\t\t|_" << showTen(op[1][2], 2) << "|" << endl;;
 
         cout << "==============================================================================================" << endl;
-        cout << "Combination: " << message1 << "     ||" << "opponent combo: " << message2 << " ||\t      by Nikitin Artem" << endl;
+        cout << "Combination: " << message1 << "   ||" << "opponent combo: " << message2 << "||\t      by Nikitin Artem" << endl;
         cout << "==============================================================================================\n";
         message1 = "";
         message2 = "";
@@ -967,8 +1001,6 @@ int round(vector<string>& comboPlayer, vector<string>& comboOp, vector<string>& 
             }
         }
     }
-    cout << "moneyOp =========" << moneyOp << endl;
-    cout << "moneyPlayer =========" << moneyPlayer << endl;
 }
 //Функция для прохождения одного курса
 int thegame(vector<string>& table, vector<string>& hands, vector<string>& op, vector<string>& all1, vector<string>& all2, vector<string>& comboPlayer, vector<string>& comboOp, int& times, int& step, int& moneyPlayer, int& moneyOp, int& croupier, int& theend, string& highPlayer, string& minPlayer, string& highOp, string& minOp)
@@ -1167,6 +1199,7 @@ int main()
                     {
                         if (moneyOp < 1)
                         {
+                            thegame(table, hands, op, all1, all2, comboPlayer, comboOp, times, step, moneyPlayer, moneyOp, croupier, theend, highPlayer, minPlayer, highOp, minOp);
                             cout << "Congratulations! You win! Opponent ran out of money.\n" << endl;
                             times = 0;
                         }
