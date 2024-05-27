@@ -15,7 +15,7 @@ pic. 2. Gameplay.
 ## Technologies:
 Code was written only with help of built-in libraries with CodeBlocks compiler, so there may be problems with other compilers. Graphic was realized in cmd.
 
-## Requirments:
+## Requirements:
 Preferably, start the code in CodeBlocks
 
 ## How to install
